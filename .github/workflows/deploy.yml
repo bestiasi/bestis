@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '26.2.0' # Pune versiunea pe care o folosești
+          node-version: '20' # Pune versiunea pe care o folosești
 
       # 3. Instalează pachetele și dă build
       - name: Install dependencies and Build
