@@ -39,3 +39,9 @@ jobs:
           # Folderul unde se va pune site-ul pe hostinger. 
           # De obicei este public_html/nume_folder/
           server-dir: ./
+
+# pentru lume care mai vrea sa faca deploy
+# trebuie pe Hostinger sa iti faci un cont de FTP
+# FTP_SERVER = ftp.bestis.ro
+# FTP_USERNAME = u{numar ciudat}.nume_pus_la_creare
+# FTP_PASSWORD = parola_pusa_la_creare
