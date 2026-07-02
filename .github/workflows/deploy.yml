@@ -38,4 +38,4 @@ jobs:
           local-dir: ./dist/ 
           # Folderul unde se va pune site-ul pe hostinger. 
           # De obicei este public_html/nume_folder/
-          server-dir: ./public_html/feedback/
+          server-dir: ./
