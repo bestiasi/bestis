@@ -33,6 +33,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          port: 21 
           # Schimbă 'dist' cu 'build' dacă folosești Create React App
           local-dir: ./dist/ 
           # Folderul unde se va pune site-ul pe hostinger. 
