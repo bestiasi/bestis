@@ -1,0 +1,40 @@
+name: Deploy Feedback App to Hostinger
+
+on:
+  push:
+    branches:
+      - main # Schimbă cu 'master' dacă branch-ul tău principal se numește așa
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descarcă codul
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Instalează Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '26.2.0' # Pune versiunea pe care o folosești
+
+      # 3. Instalează pachetele și dă build
+      - name: Install dependencies and Build
+        run: |
+          npm install
+          npm run build
+
+      # 4. Urcă folderul buildat pe Hostinger prin FTP
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Schimbă 'dist' cu 'build' dacă folosești Create React App
+          local-dir: ./dist/ 
+          # Folderul unde se va pune site-ul pe hostinger. 
+          # De obicei este public_html/nume_folder/
+          server-dir: ./public_html/feedback/
