@@ -40,8 +40,13 @@ export const translations = {
     },
     board: {
       title: 'Consiliul de Conducere',
+      role: {
+        president: 'Președinte',
+        tresurer: 'Trezorier',
+        secretary: 'Secretar General',
+      },
       members: 'Membrii Board-ului',
-      gallery: 'Galerie Board',
+      gallery: 'Galerie Noastra',
     },
     about: {
       title: 'Povestea noastră',
@@ -63,11 +68,12 @@ export const translations = {
       proveit: {
         name: 'Prove it',
         desc: 'O celebrare anuală a succesului, unde premiem partenerii, membrii și susținătorii care fac misiunea noastră posibilă.'
-      },
-      weekend: {
-        name: 'Motivational Weekend',
-        desc: 'Evenimente de team-building dedicate membrilor, axate pe dezvoltare personală, leadership și consolidarea echipei.'
       }
+    },
+    donationform: {
+      title: 'Redirecționează 3,5% din impozitul pe venit',
+      desc: 'Lucrezi în România? Dacă plătești impozit pe venit, poți direcționa 3,5% din acesta către cauza noastră—cu cost zero pentru tine. Dacă nu alegi o organizație, banii rămân la stat. Descarcă Formularul 230 precompletat, semnează-l și implică-te!',
+      apply: 'Vezi detalii',
     },
     scholarships: {
       title: 'Burse BEST',
@@ -172,8 +178,8 @@ export const translations = {
     },
     roadmap: {
       title: 'Viziunea noastră în acțiune',
-      mission: 'Misiune: Dezvoltarea studenților.',
-      vision: 'Viziune: Pregătirea studenților pentru o piață globală.',
+      mission: 'Misiune: Dezvoltarea Studenților.',
+      vision: 'Viziune: Promovăm Diversitatea.',
       values: 'Valori: Distracție, Prietenie, Flexibilitate, Evoluție și Mentalitate deschisa.'
     },
     footer: {
@@ -219,8 +225,13 @@ export const translations = {
     },
     board: {
       title: 'The Board',
+      role: {
+        president: 'President',
+        tresurer: 'Tresurer',
+        secretary: 'General Secretary',
+      },
       members: 'Board Members',
-      gallery: 'Board Gallery',
+      gallery: 'Our Gallery',
     },
     about: {
       title: 'Our Story',
@@ -242,11 +253,12 @@ export const translations = {
       proveit: {
         name: 'Prove it',
         desc: 'An annual celebration of success, where we award partners, members, and supporters who make our mission possible.'
-      },
-      weekend: {
-        name: 'Motivational Weekend',
-        desc: 'Team-building events dedicated to members, focused on personal development, leadership, and team bonding.'
       }
+    },
+    donationform: {
+      title: 'Redirect 3.5% of your Romanian Income Tax',
+      desc: 'Working in Romania? If you pay income tax here, you can direct 3.5% of it to our cause—at zero cost to you. If you don\'t choose an organization, this money stays with the state. Download the pre-filled Form 230, sign it, and make a difference!',
+      apply: 'View details',
     },
     scholarships: {
       title: 'BEST Scholarships',
@@ -352,7 +364,7 @@ export const translations = {
     roadmap: {
       title: 'Our Vision in Action',
       mission: 'Mission: Developing Students.',
-      vision: 'Vision: Preparing students for a global market.',
+      vision: 'Vision: Empower Diversity',
       values: 'Values: Fun, Friendship, Flexibility, Improvement, Open-Mindedness.'
     },
     footer: {

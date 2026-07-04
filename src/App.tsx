@@ -12,11 +12,14 @@ import {
   ArrowRight, 
   FileText, 
   GraduationCap, 
+  HandCoins,
   Users, 
   Mail, 
   Instagram, 
   Facebook, 
   Linkedin,
+  Play,
+  Music2,
   ChevronDown,
   Calendar,
   HelpCircle,
@@ -32,6 +35,10 @@ import {
 import { translations, Language } from './translations';
 
 import logoBest from './assets/SiglaBestColor.png';
+import logoIasiBest from './assets/BestIasiSince200.png'
+import proveitLogo from './assets/proveitLogo.png';
+import coursesLogo from './assets/coursesLogo.png';
+import bisLogo from './assets/bisLogo.png';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('ro');
@@ -206,7 +213,7 @@ export default function App() {
               <a href="#projects" className="text-3xl font-display font-bold uppercase" onClick={() => setIsMenuOpen(false)}>
                 {t.nav.projects}
               </a>
-              <a href={lang === 'ro' ? '#/burse' : '#/scholarships'} className="text-3xl font-display font-bold uppercase text-best-yellow" onClick={() => setIsMenuOpen(false)}>
+              <a href={lang === 'ro' ? '#/burse' : '#/scholarships'} className="text-3xl font-display font-bold uppercase" onClick={() => setIsMenuOpen(false)}>
                 {t.nav.scholarships}
               </a>
               <a href={lang === 'ro' ? '#/parteneri-strategici' : '#/partners-strategic'} className="text-3xl font-display font-bold uppercase" onClick={() => setIsMenuOpen(false)}>
@@ -332,12 +339,11 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {[
-                    { id: 'courses', data: t.projects.courses, color: 'bg-best-yellow' },
-                    { id: 'symposium', data: t.projects.symposium, color: 'bg-white' },
-                    { id: 'proveit', data: t.projects.proveit, color: 'bg-best-yellow' },
-                    { id: 'weekend', data: t.projects.weekend, color: 'bg-white' },
+                    { id: 'courses', data: t.projects.courses, color: 'bg-best-yellow', link: 'https://www.best.eu.org/courses/welcome.jsp', image: coursesLogo },
+                    { id: 'symposium', data: t.projects.symposium, color: 'bg-best-yellow', link: 'https://symposium.bestis.ro/', image: bisLogo},
+                    { id: 'proveit', data: t.projects.proveit, color: 'bg-best-yellow', link: 'https://proveit.bestis.ro/', image: proveitLogo},
                   ].map((proj, i) => (
                     <motion.div
                       key={proj.id}
@@ -347,6 +353,21 @@ export default function App() {
                       transition={{ delay: i * 0.1 }}
                       className="group relative h-[400px] bg-best-black border border-white/5 overflow-hidden p-8 flex flex-col justify-end"
                     >
+                      <img 
+                        src={proj.image} 
+                        alt={proj.data.name} 
+                        // w-72 face imaginea mult mai mare. mx-auto o centrează, mb-auto o împinge sus.
+                        className="w-72 mx-auto object-contain transition-transform group-hover:scale-105 mb-auto"
+                        style={{
+                          // Primul gradient (orizontal): Transparent -> Clar (5%) -> Clar (95%) -> Transparent
+                          WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)',
+                          maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)',
+                          
+                          // Asta forțează cele două gradiente să se intersecteze, creând o mască clară în mijloc și blurată doar pe perimetru
+                          WebkitMaskComposite: 'source-in',
+                          maskComposite: 'intersect',
+                        }}
+                      />
                       <div className={`absolute top-0 right-0 w-32 h-32 ${proj.color} opacity-10 group-hover:opacity-20 transition-opacity blur-3xl`} />
                       <div className={`w-8 h-1 mb-8 ${proj.color}`} />
                       <h3 className="text-2xl font-display font-bold mb-4 uppercase tracking-tight">
@@ -355,9 +376,11 @@ export default function App() {
                       <p className="text-sm text-white/50 leading-relaxed group-hover:text-white/80 transition-colors">
                         {proj.data.desc}
                       </p>
-                      <div className="mt-8 flex items-center gap-2 text-xs font-bold text-best-yellow uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 cursor-pointer">
-                        Learn more <ArrowRight className="w-3 h-3" />
-                      </div>
+                      <a target="_blank" rel="noopener noreferrer" href={proj.link}>
+                        <div className="mt-8 flex items-center gap-2 text-xs font-bold text-best-yellow uppercase tracking-widest opacity-100 md:opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 cursor-pointer">
+                          Learn more <ArrowRight className="w-3 h-3" />
+                        </div>
+                      </a>
                     </motion.div>
                   ))}
                 </div>
@@ -434,11 +457,11 @@ export default function App() {
                 {/* Board Members Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-24">
                   {[
-                    { role: 'President', name: 'John Doe' },
-                    { role: 'Treasurer', name: 'Jane Smith' },
-                    { role: 'Secretary', name: 'Mike Ross' },
-                    { role: 'VP HR', name: 'Sarah Connor' },
-                    { role: 'VP PR', name: 'Alex Hunt' },
+                    { role: t.board.role.president, name: 'Nicu' },
+                    { role: t.board.role.tresurer, name: 'Tibi' },
+                    { role: t.board.role.secretary, name: 'Grigore' },
+                    { role: 'VP HR', name: 'Urmeaza de pus' },
+                    { role: 'VP PR', name: 'poze mai sus' },
                   ].map((member, i) => (
                     <motion.div 
                       key={i}
@@ -463,7 +486,7 @@ export default function App() {
                   ))}
                 </div>
 
-                {/* Board Gallery */}
+                {/* Our Gallery */}
                 <div>
                   <h3 className="text-2xl font-display font-bold uppercase border-l-4 border-best-yellow pl-4 mb-12">
                     {(t as any).board.gallery}
@@ -544,9 +567,9 @@ export default function App() {
             </section>
 
             {/* Impact Section */}
-            <section id="impact" className="py-32 bg-best-yellow text-best-black overflow-hidden relative border-y border-best-black">
-              <div className="container mx-auto px-6 relative z-10">
-                <div className="max-w-4xl mb-32">
+            <section id="impact" className="py-16 bg-best-yellow text-best-black overflow-hidden relative border-y border-best-black">
+              <div className="container mx-auto px-0 relative z-10">
+                <div className="max-w-4xl mb-16">
                   <h2 className="text-7xl md:text-9xl font-display font-black uppercase tracking-tighter mb-8 italic leading-[0.8]">
                     {(t as any).impact?.title}
                   </h2>
@@ -555,11 +578,11 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-1 bg-best-black border border-best-black">
+                <div className="grid md:grid-cols-3 gap-0 bg-best-black border border-best-black">
                   {[
                     { id: 'students', data: (t as any).impact?.students, icon: GraduationCap },
-                    { id: 'partners', data: (t as any).impact?.partners, icon: Users },
                     { id: 'university', data: (t as any).impact?.university, icon: Globe },
+                    { id: 'partners', data: (t as any).impact?.partners, icon: Users },
                   ].map((item, i) => (
                     <motion.div 
                       key={i}
@@ -567,10 +590,10 @@ export default function App() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1, duration: 0.6 }}
-                      className="bg-best-black text-white p-16 group hover:bg-white hover:text-best-black transition-all duration-700 min-h-[500px] flex flex-col justify-between"
+                      className="bg-best-black text-white p-10 group hover:bg-white hover:text-best-black transition-all duration-700 min-h-[500px] flex flex-col justify-between"
                     >
                       <div>
-                        <item.icon className="w-20 h-20 text-best-yellow mb-20 group-hover:scale-125 transition-transform duration-500 origin-left" />
+                        <item.icon className= "w-20 h-20 text-best-yellow mb-20 group-hover:scale-125 transition-transform duration-500 origin-left" />
                         <h3 className="text-5xl font-display font-black uppercase mb-10 italic tracking-tighter leading-none group-hover:text-best-black">
                           {item.data?.title}
                         </h3>
@@ -582,103 +605,74 @@ export default function App() {
                   ))}
                 </div>
 
-                <div className="mt-24 pt-24 border-t border-best-black/20">
-                  <h3 className="text-xl font-display font-bold uppercase tracking-widest mb-12 opacity-60">Supported by industry leaders</h3>
-                  <div className="flex flex-wrap justify-between items-center gap-12 grayscale opacity-50 contrast-125">
-                    {['TechCorp', 'InnoSoft', 'FutureBuild', 'GlobalSols', 'EuroEngine'].map((partner) => (
-                      <div key={partner} className="text-3xl font-display font-black italic">{partner}</div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </section>
 
-            {/* Category: BEST Scholarships (Teaser) */}
-            <section id="scholarships" className="py-24 bg-best-dark relative overflow-hidden">
+            {/* Formular 3.5% */}
+            <section id="donationform" className="py-24 bg-best-dark relative overflow-hidden">
               <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-16 items-center">
+                {/* Schimbat grid-ul pentru a genera matricea 2x2 direct */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-5 items-stretch">
+                  
+                  {/* 1. STÂNGA SUS: Iconița (Rămâne neschimbată ca aspect) */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     className="relative aspect-square md:aspect-video bg-best-yellow flex items-center justify-center"
                   >
-                    <GraduationCap className="w-32 h-32 text-best-black" />
-                    <div className="absolute top-4 left-4 text-best-black font-display font-bold text-xl uppercase">Scholarships</div>
+                    <HandCoins className="w-32 h-32 text-best-black" />
+                    <div className="absolute top-4 left-4 text-best-black font-display font-bold text-xl uppercase">Donation</div>
                   </motion.div>
+
+                  {/* 2. DREAPTA SUS: Titlul și Bullet Points */}
                   <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
+                    className="flex flex-col justify-center"
                   >
-                    <h2 className="text-5xl md:text-7xl font-display font-bold mb-8 uppercase leading-none">
-                      {t.scholarships.title}
+                    <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 uppercase leading-none text-white">
+                      {t.donationform.title}
                     </h2>
-                    <p className="text-xl text-white/70 mb-10 leading-relaxed font-light">
-                      {t.scholarships.description}
+                  </motion.div>
+
+                  {/* 3. STÂNGA JOS: Textul descriptiv */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="flex items-center"
+                  >
+                    <p className="text-lg md:text-xl text-white/70 leading-relaxed font-light">
+                      {t.donationform.desc}
                     </p>
-                    <ul className="space-y-4 mb-10">
-                      {['Academic Support', 'Community Engagement', 'Future Leadership'].map((item, i) => (
-                        <li key={i} className="flex items-center gap-3 text-white/90">
-                          <div className="w-2 h-2 bg-best-yellow" />
-                          <span className="font-medium">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  </motion.div>
+
+                  {/* 4. DREAPTA JOS: Butonul CTA mare (Simetric cu iconița din stânga sus) */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="flex"
+                  >
                     <a 
-                      href={lang === 'ro' ? '#/burse' : '#/scholarships'} 
-                      className="inline-flex items-center gap-2 group text-best-yellow font-bold uppercase tracking-widest hover:text-white transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://redirectioneaza.ro/best-iasi/" 
+                      className="w-full aspect-square md:aspect-video bg-best-yellow hover:bg-white text-best-black flex flex-col items-center justify-center gap-4 transition-colors duration-300 group p-6 text-center"
                     >
-                      {t.scholarships.apply}
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <span className="font-display font-bold text-xl md:text-2xl uppercase tracking-widest">
+                        {t.donationform.apply}
+                      </span>
+                      <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform duration-300" />
                     </a>
                   </motion.div>
+
                 </div>
               </div>
             </section>
 
-            {/* Annual Activity Report (Teaser) */}
-            <section id="report" className="py-24 border-y border-white/10">
-              <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                  <div className="max-w-2xl">
-                    <h2 className="text-5xl md:text-7xl font-display font-bold uppercase leading-none mb-6">
-                      {t.report.title}
-                    </h2>
-                    <p className="text-xl text-white/60 font-light">
-                      {t.report.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-4">
-                    <a 
-                      href={lang === 'ro' ? '#/raport-activitate' : '#/report'} 
-                      className="px-8 py-4 border border-white/20 hover:border-white transition-colors font-display font-bold text-lg uppercase tracking-tight flex items-center justify-center gap-3"
-                    >
-                      {lang === 'ro' ? 'Detalii Raport' : 'Report Details'}
-                      <ArrowRight className="w-5 h-5" />
-                    </a>
-                    <button className="group px-8 py-4 bg-white text-best-black font-display font-bold text-lg uppercase tracking-tight flex items-center justify-center gap-3 hover:bg-best-yellow transition-all">
-                      <FileText className="w-5 h-5" />
-                      {t.report.download}
-                    </button>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-1 px-1 bg-white/10 border border-white/10">
-                  {[
-                    { label: 'Events Organized', value: '12+', icon: Users },
-                    { label: 'Student Outreach', value: '2500+', icon: GraduationCap },
-                    { label: 'Active Members', value: '80+', icon: Users },
-                  ].map((stat, i) => (
-                    <div key={i} className="bg-best-black p-8 flex flex-col items-center text-center">
-                      <stat.icon className="w-10 h-10 text-best-yellow mb-4" />
-                      <div className="text-4xl font-display font-bold mb-1">{stat.value}</div>
-                      <div className="text-sm uppercase tracking-widest text-white/40">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
           </motion.div>
         )}
 
@@ -732,30 +726,32 @@ export default function App() {
       </AnimatePresence>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-best-yellow">
+      <section id="contact" className="py-16 bg-best-yellow">
         <div className="container mx-auto px-6 text-best-black">
           <div className="grid md:grid-cols-2 gap-16">
             <div>
               <h2 className="text-5xl md:text-7xl font-display font-bold uppercase leading-none mb-12">
-                Get in<br />touch
+                {lang == 'ro' ? (<>Intra in<br/>Contact</>) : (<>Get in<br/>touch</>)}
               </h2>
               <div className="space-y-8">
-                <div className="flex items-center gap-4">
+                <a 
+                  href="mailto:contact@bestis.ro"
+                  className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-best-black flex items-center justify-center text-white">
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
                     <div className="text-xs uppercase font-bold tracking-widest opacity-60">Email</div>
-                    <div className="text-xl font-bold">iasi@BEST-eu.org</div>
+                    <div className="text-xs font-bold">contact@bestis.ro</div>
                   </div>
-                </div>
+                </a>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-best-black flex items-center justify-center text-white">
                     <Users className="w-6 h-6" />
                   </div>
                   <div>
                     <div className="text-xs uppercase font-bold tracking-widest opacity-60">Address</div>
-                    <div className="text-xl font-bold">Bulevardul Prof. D. Mangeron 67, Iași</div>
+                    <div className="text-xs font-bold">Cămin T19, Aleea Profesor Gheorghe Alexa, Iași</div>
                   </div>
                 </div>
               </div>
@@ -763,19 +759,28 @@ export default function App() {
             
             <div className="bg-best-black text-white p-10 flex flex-col justify-between">
               <div>
-                <h3 className="text-3xl font-display font-bold mb-6">Connect with us</h3>
+                <h3 className="text-3xl font-display font-bold mb-6">{lang == 'ro' ? 'Conectează-te cu noi' : 'Connect with us'}</h3>
                 <p className="text-white/60 mb-10 max-w-sm">
-                  Follow us on social media for real-time updates on projects, events, and scholarships.
+                  { lang == 'ro' ?
+                    'Urmărește-ne pe rețelele sociale pentru noutăți în timp real despre proiecte, evenimente și burse.' :
+                    'Follow us on social media for real-time updates on projects, events, and scholarships.'
+                  }
                 </p>
                 <div className="flex gap-6 mb-12">
-                  <a href="#" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
+                  <a target="_blank" href="https://www.instagram.com/bestiasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
                     <Instagram className="w-6 h-6" />
                   </a>
-                  <a href="#" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
+                  <a target="_blank" href="https://www.facebook.com/bestiasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
                     <Facebook className="w-6 h-6" />
                   </a>
-                  <a href="#" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
+                  <a target="_blank" href="https://www.linkedin.com/company/best-iasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
                     <Linkedin className="w-6 h-6" />
+                  </a>
+                  <a target="_blank" href="https://www.youtube.com/@BESTIasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
+                    <Play className="w-6 h-6" />
+                  </a>
+                  <a target="_blank" href="https://www.tiktok.com/@best.iasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
+                    <Music2 className="w-6 h-6" />
                   </a>
                 </div>
               </div>
@@ -790,16 +795,16 @@ export default function App() {
       {/* Footer */}
       <footer className="py-12 border-t border-white/5">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-best-yellow" />
-            <span className="font-display font-bold tracking-tighter uppercase">BEST Iași</span>
-          </div>
+          <img 
+              src={logoIasiBest} 
+              alt="BEST Iasi Logo" 
+              className="w-40 object-contain transition-transform group-hover:scale-105 pr-0" 
+            />
           <p className="text-sm text-white/40">
             {t.footer.rights}
           </p>
           <div className="flex gap-8 text-xs uppercase font-bold tracking-widest opacity-40">
-            <a href="#" className="hover:opacity-100 transition-opacity">Privacy</a>
-            <a href="#" className="hover:opacity-100 transition-opacity">Terms</a>
+            <a href="#" className="hover:opacity-100 transition-opacity">GDPR</a>
           </div>
         </div>
       </footer>
@@ -1075,7 +1080,7 @@ function StrategicPartnersPage({ t, lang }: { t: any; lang: string }) {
                   <Award className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-lg mb-2 text-white/90">Benefit {i + 1}</h3>
+                  <h3 className="font-display font-bold text-lg mb-2 text-white/90">{lang == 'ro' ? 'Beneficiu' : 'Benefit' } {i + 1}</h3>
                   <p className="text-white/60 leading-relaxed text-sm font-light">{benefit}</p>
                 </div>
               </div>
