@@ -1,0 +1,22 @@
+=====1.la vision trb modificat in empower diversity
+=====2.pe telefoane este dat margin-ul ciudat
+=====3.bursa best sa aibe logo-ul ei
+=====4.de corectat "galeria noastra"* sau de pus memories in romana si engleza
+5.de pus poze cu bestani la departamente
+=====6.buton de gdpr sa te duca la gdpr
+7.butonul de alatura-te noua nu functioneaza
+8."facilitam schimbul cultural, dezvoltarea abilitatilor tehnice..." e bs prea mare
+9.impact & events in ro. trb modificat
+=====10.dezvoltare complementara -> educatie complementara
+=====11.scoatem beneficii la parteneri strategigi si scoase pachetele
+12.adaugam partenerii din acest an
+=====13.sters sectiunea de performanta in cifre
+=====14.BEST Iasi report pdf am nevoie
+=====15.poza cu noi ca LBG in dreapta, de la cabana maybe, fix cum intri
+=====16.textul are 128px -> 100px cel de landing page
+17.nu este consistenta in dimensiunea textelor 72px vs 92p(consiliul de conducere vs viziunea noastra in actiune)
+18.pagina de parteneri strategici exte uncta, dar avem si in footer cta
+19.poate implementam best spirit la noi pe site in loc de "cursuri si evenimente"
+20.alb in spate la fontul de la BIS
+=====21.sectiunea legata de impact sa fie core pillars si piloni de activitate best
+22.poate o sectiune cu evenimente vechi

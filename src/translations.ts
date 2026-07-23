@@ -5,7 +5,7 @@ export const translations = {
     nav: {
       about: 'Despre Noi',
       projects: 'Proiecte',
-      scholarships: 'Burse BEST',
+      scholarships: 'BEST Scholarships',
       partners: 'Parteneri',
       report: 'Raport de Activitate',
       contact: 'Contact',
@@ -46,7 +46,7 @@ export const translations = {
         secretary: 'Secretar General',
       },
       members: 'Membrii Board-ului',
-      gallery: 'Galerie Noastra',
+      gallery: 'Memories',
     },
     about: {
       title: 'Povestea noastră',
@@ -76,37 +76,9 @@ export const translations = {
       apply: 'Vezi detalii',
     },
     scholarships: {
-      title: 'Burse BEST',
+      title: 'BEST Scholarships',
       description: 'Susținem excelența academică și implicarea activă în comunitatea studențească prin programe de burse dedicate studenților din cadrul Universității Tehnice "Gheorghe Asachi" din Iași.',
-      apply: 'Vezi detalii',
-      criteriaTitle: 'Criterii de Selecție',
-      criteria: [
-        'Student înmatriculat la Universitatea Tehnică "Gheorghe Asachi" din Iași.',
-        'Implicare activă în activități extracurriculare, voluntariat sau proiecte studențești.',
-        'Performanță academică sau dorință demonstrabilă de dezvoltare personală și profesională.',
-        'Recomandare din partea unei organizații studențești sau a unui cadru didactic (reprezintă un avantaj).'
-      ],
-      calendarTitle: 'Calendarul Procesului de Selecție',
-      calendar: [
-        { date: '1 - 15 Octombrie', step: 'Lansarea apelului și depunerea dosarelor online.' },
-        { date: '16 - 22 Octombrie', step: 'Evaluarea dosarelor și selecția pentru interviu.' },
-        { date: '25 - 30 Octombrie', step: 'Desfășurarea interviurilor cu comisia de selecție.' },
-        { date: '5 Noiembrie', step: 'Anunțarea rezultatelor finale.' }
-      ],
-      faqTitle: 'Întrebări Frecvente',
-      faq: [
-        { q: 'Cine poate aplica pentru Bursele BEST?', a: 'Orice student de la TUIASI, indiferent de anul de studiu sau facultate, care demonstrează implicare și pasiune pentru dezvoltare.' },
-        { q: 'Ce trebuie să conțină dosarul de aplicare?', a: 'Un CV actualizat, o scrisoare de motivație în care să explici de ce meriți bursa și dovezi ale activităților de voluntariat/proiecte.' },
-        { q: 'Se pot cumula cu bursele oferite de universitate?', a: 'Da, bursele BEST sunt private și se pot cumula cu bursele de merit, studiu sau sociale acordate de TUIASI.' }
-      ],
-      formTitle: 'Aplică pentru Bursă',
-      formName: 'Nume complet',
-      formEmail: 'Adresă de email',
-      formFaculty: 'Facultatea',
-      formYear: 'Anul de studiu',
-      formMotivation: 'De ce aplici pentru bursa BEST?',
-      formSubmit: 'Trimite Aplicația',
-      formSuccess: 'Aplicația a fost trimisă cu succes!'
+      inwork: 'In acest moment, programul BEST Scholarships este in pregătire! Urmărește-ne pe social-media pentru a fi la curent cu toate update-urile!',
     },
     report: {
       title: 'Raport de Activitate 2026',
@@ -161,11 +133,11 @@ export const translations = {
       ]
     },
     impact: {
-      title: 'Impact',
+      title: 'Piloni de Activitate',
       subtitle: 'Creăm valoare pentru universitate, studenți și parteneri.',
       students: {
         title: 'Pentru Studenți',
-        desc: 'Dezvoltare complementară, experiențe internaționale și conexiuni cu piața muncii.'
+        desc: 'Educație complementară, experiențe internaționale și conexiuni cu piața muncii.'
       },
       partners: {
         title: 'Pentru Parteneri',
@@ -231,7 +203,7 @@ export const translations = {
         secretary: 'General Secretary',
       },
       members: 'Board Members',
-      gallery: 'Our Gallery',
+      gallery: 'Memories',
     },
     about: {
       title: 'Our Story',
@@ -263,35 +235,7 @@ export const translations = {
     scholarships: {
       title: 'BEST Scholarships',
       description: 'We support academic excellence and active involvement in the student community through scholarship programs dedicated to students at the "Gheorghe Asachi" Technical University of Iași.',
-      apply: 'View details',
-      criteriaTitle: 'Selection Criteria',
-      criteria: [
-        'Student enrolled at the "Gheorghe Asachi" Technical University of Iași.',
-        'Active involvement in extracurricular activities, volunteering, or student projects.',
-        'Academic performance or a demonstrable desire for personal and professional development.',
-        'Recommendation from a student organization or faculty member (is an advantage).'
-      ],
-      calendarTitle: 'Selection Process Timeline',
-      calendar: [
-        { date: 'October 1 - 15', step: 'Call launch and online application submission.' },
-        { date: 'October 16 - 22', step: 'Application evaluation and interview selection.' },
-        { date: 'October 25 - 30', step: 'Interviews with the selection committee.' },
-        { date: 'November 5', step: 'Final results announcement.' }
-      ],
-      faqTitle: 'Frequently Asked Questions',
-      faq: [
-        { q: 'Who can apply for BEST Scholarships?', a: 'Any TUIASI student, regardless of the study year or faculty, who demonstrates active involvement and a passion for growth.' },
-        { q: 'What should the application file contain?', a: 'An updated CV, a cover letter explaining why you deserve the scholarship, and proof of volunteering/project activities.' },
-        { q: 'Can they be combined with university-provided scholarships?', a: 'Yes, BEST scholarships are private and can be combined with merit, study, or social scholarships awarded by TUIASI.' }
-      ],
-      formTitle: 'Apply for Scholarship',
-      formName: 'Full Name',
-      formEmail: 'Email Address',
-      formFaculty: 'Faculty',
-      formYear: 'Year of Study',
-      formMotivation: 'Why are you applying for the BEST scholarship?',
-      formSubmit: 'Submit Application',
-      formSuccess: 'Application submitted successfully!'
+      inwork: 'At this moment, BEST Scholarships is in work. Follow us on social-media to stay updated!',
     },
     report: {
       title: 'Activity Report 2026',
@@ -346,11 +290,11 @@ export const translations = {
       ]
     },
     impact: {
-      title: 'Impact',
+      title: 'Core Pillars',
       subtitle: 'We create value for the university, students, and partners.',
       students: {
         title: 'For Students',
-        desc: 'Complementary development, international experiences, and connections with the labor market.'
+        desc: 'Complementary education, international experiences, and connections with the labor market.'
       },
       partners: {
         title: 'For Partners',

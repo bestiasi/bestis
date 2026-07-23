@@ -34,11 +34,25 @@ import {
 
 import { translations, Language } from './translations';
 
-import logoBest from './assets/SiglaBestColor.png';
-import logoIasiBest from './assets/BestIasiSince200.png'
-import proveitLogo from './assets/proveitLogo.png';
-import coursesLogo from './assets/coursesLogo.png';
-import bisLogo from './assets/bisLogo.png';
+import logoBest from './assets/logos/SiglaBestColor.png';
+import logoIasiBest from './assets/logos/BestIasiSince200.png'
+import proveitLogo from './assets/logos/proveitLogo.png';
+import coursesLogo from './assets/logos/coursesLogo.png';
+import bisLogo from './assets/logos/bisLogo.png';
+import teamPhoto from './assets/gallery/poza_izvor.jpg';
+
+// Board pictures
+import presidentPicture from './assets/board/dani.webp';
+import tresurerPicture from './assets/board/xenia.webp';
+import secretaryPicture from './assets/board/radu.webp';
+import vphrPicture from './assets/board/radu.webp';
+import vpprPicture from './assets/board/anonymous.jpg';
+
+// Department pictures
+import prPFP from './assets/departament/pretzel.jpg';
+import hrPFP from './assets/departament/castor.jpg';
+import itPFP from './assets/departament/grigore.jpg';
+import frPFP from './assets/departament/leo.jpg';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('ro');
@@ -82,6 +96,9 @@ export default function App() {
             }, 100);
           }
         }
+      } else if (hash == '#/proiecte' || hash == '#/all-projects') {
+        setCurrentRoute('all-projects');
+        window.scrollTo(0, 0);
       } else if (hash === '#/burse' || hash === '#/scholarships') {
         setCurrentRoute('scholarships');
         window.scrollTo(0, 0);
@@ -103,6 +120,8 @@ export default function App() {
   }, [lang]);
 
   const toggleLang = () => setLang(prev => prev === 'ro' ? 'en' : 'ro');
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-best-black selection:bg-best-yellow selection:text-best-black text-white">
@@ -135,7 +154,7 @@ export default function App() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             <a href="#about" className="text-sm font-medium uppercase tracking-widest hover:text-best-yellow transition-colors">{t.nav.about}</a>
-            <a href="#projects" className="text-sm font-medium uppercase tracking-widest hover:text-best-yellow transition-colors">{t.nav.projects}</a>
+            <a href={lang === 'ro' ? '#/proiecte' : '#/all-projects'} className="text-sm font-medium uppercase tracking-widest hover:text-best-yellow transition-colors">{t.nav.projects}</a>
             <a href={lang === 'ro' ? '#/burse' : '#/scholarships'} className="text-sm font-medium uppercase tracking-widest hover:text-best-yellow transition-colors">{t.nav.scholarships}</a>
             
             {/* Partners Dropdown */}
@@ -210,7 +229,7 @@ export default function App() {
               <a href="#about" className="text-3xl font-display font-bold uppercase" onClick={() => setIsMenuOpen(false)}>
                 {t.nav.about}
               </a>
-              <a href="#projects" className="text-3xl font-display font-bold uppercase" onClick={() => setIsMenuOpen(false)}>
+              <a href={lang === 'ro' ? '#/proiecte' : '#/all-projects'} className="text-3xl font-display font-bold uppercase" onClick={() => setIsMenuOpen(false)}>
                 {t.nav.projects}
               </a>
               <a href={lang === 'ro' ? '#/burse' : '#/scholarships'} className="text-3xl font-display font-bold uppercase" onClick={() => setIsMenuOpen(false)}>
@@ -251,48 +270,86 @@ export default function App() {
             transition={{ duration: 0.2 }}
           >
             {/* Hero Section */}
-            <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-              <div className="absolute top-1/4 -right-20 w-96 h-96 bg-best-yellow/10 rounded-full blur-[100px]" />
-              <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-white/5 rounded-full blur-[100px]" />
-              
-              <div className="container mx-auto px-6 relative z-10">
-                <div className="max-w-4xl">
-                  <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <span className="inline-block px-3 py-1 bg-best-yellow text-best-black font-bold text-xs uppercase tracking-widest mb-6">
-                      EST. 2000
-                    </span>
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-[0.9] tracking-tighter mb-8 bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent">
-                      {t.hero.title}
-                    </h1>
-                    <p className="text-xl md:text-2xl text-white/60 max-w-2xl font-light mb-12">
-                      {t.hero.subtitle}
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <button onClick={() => window.open("https://recrutari.bestis.ro", "_blank")} className="group px-8 py-4 bg-best-yellow text-best-black font-display font-bold text-lg uppercase tracking-tight flex items-center justify-center gap-3 hover:bg-white transition-all transform hover:-translate-y-1">
-                        {t.hero.cta}
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </button>
-                      <a href="#about" className="px-8 py-4 border border-white/20 hover:border-white transition-colors font-display font-bold text-lg uppercase tracking-tight text-center">
-                        {t.nav.about}
-                      </a>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
+            <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-best-black">
+                {/* Existing Background Ambient Glows */}
+                <div className="absolute top-1/4 -right-20 w-96 h-96 bg-best-yellow/10 rounded-full blur-[100px] pointer-events-none z-0" />
+                <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-white/5 rounded-full blur-[100px] pointer-events-none z-0" />
 
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-                <ChevronDown className="w-8 h-8 opacity-30" />
-              </div>
-            </section>
+                {/* NEW: Blended Team Image (Right Side Bleed) */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  className="absolute top-0 right-0 w-full lg:w-7/12 h-full z-0 pointer-events-none overflow-hidden"
+                >
+                  {/* The Team Photo */}
+                  <img
+                    src={teamPhoto} // Replace with your image path
+                    alt="BEST Team Members"
+                    className="w-full h-full object-cover object-center opacity-40 lg:opacity-60 filter contrast-125"
+                  />
+
+                  {/* 1. Left-to-Right Gradient: Fades the left edge of the photo into the text */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-best-black via-best-black/60 to-transparent" />
+                  
+                  {/* 2. Bottom-to-Top Gradient: Fades the bottom into the next section */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-best-black via-transparent to-black/40" />
+
+                  {/* 3. Top Fade: Softens the top edge near the navbar */}
+                  <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-best-black to-transparent" />
+                  
+                </motion.div>
+
+                {/* Content Container (z-10 ensures text sits above the blended image) */}
+                <div className="container mx-auto px-6 relative z-10">
+                  <div className="max-w-4xl">
+                    <motion.div
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      <span className="inline-block px-3 py-1 bg-best-yellow text-best-black font-bold text-xs uppercase tracking-widest mb-6">
+                        EST. 2000
+                      </span>
+                      
+                      {/* Added a subtle drop shadow to the text for extra legibility over the image */}
+                      <h1 className="text-5xl md:text-6xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-8 bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent drop-shadow-sm">
+                        {t.hero.title}
+                      </h1>
+                      
+                      <p className="text-xl md:text-2xl text-white/70 max-w-2xl font-light mb-12 drop-shadow-md">
+                        {t.hero.subtitle}
+                      </p>
+                      
+                      {/* Buton cu formular de preinscrieri sau cu site recrutari \/   */}
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button 
+                          onClick={() => window.open("https://docs.google.com/forms/d/1kMr0argoZSAAjltphzLk_hNpeHvUkD7X5DZEW51YrXw/viewform?usp=drivesdk&edit_requested=true", "_blank")} 
+                          className="group px-8 py-4 bg-best-yellow text-best-black font-display font-bold text-lg uppercase tracking-tight flex items-center justify-center gap-3 hover:bg-white transition-all transform hover:-translate-y-1 shadow-lg"
+                        >
+                          {t.hero.cta}
+                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                        <a 
+                          href="#about" 
+                          className="px-8 py-4 border border-white/20 hover:border-white transition-colors font-display font-bold text-lg uppercase tracking-tight text-center backdrop-blur-sm bg-black/20"
+                        >
+                          {t.nav.about}
+                        </a>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
+                  <ChevronDown className="w-8 h-8 opacity-30" />
+                </div>
+              </section>
 
             {/* About Us Section */}
             <section id="about" className="py-24 relative">
               <div className="container mx-auto px-6">
-                <h2 className="text-5xl md:text-8xl font-display font-bold uppercase mb-16 tracking-tighter">
+                <h2 className="text-4xl md:text-7xl font-display font-bold uppercase mb-16 tracking-tighter">
                   {t.about.title}
                 </h2>
                 <div className="grid md:grid-cols-2 gap-12">
@@ -333,11 +390,13 @@ export default function App() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16">
                   <div>
                     <span className="text-best-yellow font-bold uppercase tracking-widest text-xs mb-4 block">Impact & Events</span>
-                    <h2 className="text-5xl md:text-7xl font-display font-bold uppercase leading-none">
+                    <h2 className="text-4xl md:text-7xl font-display font-bold uppercase leading-none">
                       {t.projects.title}
                     </h2>
                   </div>
                 </div>
+
+                
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {[
@@ -378,12 +437,22 @@ export default function App() {
                       </p>
                       <a target="_blank" rel="noopener noreferrer" href={proj.link}>
                         <div className="mt-8 flex items-center gap-2 text-xs font-bold text-best-yellow uppercase tracking-widest opacity-100 md:opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 cursor-pointer">
-                          Learn more <ArrowRight className="w-3 h-3" />
+                          {lang === 'ro' ? 'Află detalii' : 'Learn more'} <ArrowRight className="w-3 h-3" />
                         </div>
                       </a>
                     </motion.div>
                   ))}
                 </div>
+
+                {/* BUTON: Afla mai multe */}
+                <a
+                  href={lang === 'ro' ? '#/proiecte' : '#/all-projects'}
+                  className="group md:w-51 mt-5 px-6 py-3 border border-best-yellow/40 hover:border-best-yellow text-best-yellow font-display font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-3 hover:bg-best-yellow hover:text-best-black"
+                >
+                  {lang === 'ro' ? 'Vezi toate proiectele' : 'See all projects'}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+
               </div>
             </section>
 
@@ -391,7 +460,7 @@ export default function App() {
             <section id="departments" className="py-24 bg-best-black relative">
               <div className="container mx-auto px-6">
                 <div className="flex flex-col items-center text-center mb-16">
-                  <h2 className="text-5xl md:text-7xl font-display font-bold uppercase mb-6 tracking-tighter">
+                  <h2 className="text-4xl md:text-7xl font-display font-bold uppercase mb-6 tracking-tighter">
                     {t.departments.title}
                   </h2>
                   <div className="w-24 h-2 bg-best-yellow" />
@@ -399,10 +468,10 @@ export default function App() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                   {[
-                    { id: 'pr', data: t.departments.pr, icon: Globe },
-                    { id: 'hr', data: t.departments.hr, icon: Users },
-                    { id: 'it', data: t.departments.it, icon: FileText },
-                    { id: 'fr', data: t.departments.fr, icon: Mail },
+                    { id: 'pr', data: t.departments.pr, icon: Globe     ,source: prPFP  },
+                    { id: 'hr', data: t.departments.hr, icon: Users     ,source: hrPFP  },
+                    { id: 'it', data: t.departments.it, icon: FileText  ,source: itPFP  },
+                    { id: 'fr', data: t.departments.fr, icon: Mail      ,source: frPFP  },
                   ].map((dept, i) => (
                     <motion.div
                       key={dept.id}
@@ -418,7 +487,7 @@ export default function App() {
                           <dept.icon className="w-12 h-12 text-white group-hover:text-best-black" />
                         </div>
                         <img 
-                          src={`https://images.unsplash.com/photo-${dept.id === 'it' ? '1517694712202-14dd9538aa97' : dept.id === 'pr' ? '1557804506-669a67965ba0' : dept.id === 'hr' ? '1521737711867-e3b97375f902' : '1553729459-efe14ef6055d'}?auto=format&fit=crop&q=80&w=800`} 
+                          src={dept.source} 
                           alt={dept.data.name}
                           className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity"
                           referrerPolicy="no-referrer"
@@ -448,7 +517,7 @@ export default function App() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
                   <div>
                     <span className="text-best-yellow font-bold uppercase tracking-widest text-xs mb-4 block">Leadership</span>
-                    <h2 className="text-5xl md:text-7xl font-display font-bold uppercase leading-none">
+                    <h2 className="text-4xl md:text-7xl font-display font-bold uppercase leading-none">
                       {(t as any).board.title}
                     </h2>
                   </div>
@@ -457,11 +526,11 @@ export default function App() {
                 {/* Board Members Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-24">
                   {[
-                    { role: t.board.role.president, name: 'Nicu' },
-                    { role: t.board.role.tresurer, name: 'Tibi' },
-                    { role: t.board.role.secretary, name: 'Grigore' },
-                    { role: 'VP HR', name: 'Urmeaza de pus' },
-                    { role: 'VP PR', name: 'poze mai sus' },
+                    { role: t.board.role.president, name: 'Daniel Diaconu', source: presidentPicture  },
+                    { role: t.board.role.tresurer,  name: 'Xenia Miron',    source: tresurerPicture   },
+                    { role: t.board.role.secretary, name: 'Stefan Radu',    source: secretaryPicture  },
+                    { role: 'VP HR',                name: 'Stefan Radu',    source: vphrPicture       },
+                    { role: 'VP PR',                name: 'Anonymous',      source: vpprPicture       },
                   ].map((member, i) => (
                     <motion.div 
                       key={i}
@@ -473,7 +542,7 @@ export default function App() {
                     >
                       <div className="aspect-[3/4] bg-white/5 border border-white/10 mb-4 overflow-hidden relative">
                         <img 
-                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.name}`} 
+                          src={member.source} 
                           alt={member.name}
                           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all scale-110 group-hover:scale-100"
                           referrerPolicy="no-referrer"
@@ -486,20 +555,32 @@ export default function App() {
                   ))}
                 </div>
 
-                {/* Our Gallery */}
+                {/* Memories / Gallery Section */}
                 <div>
-                  <h3 className="text-2xl font-display font-bold uppercase border-l-4 border-best-yellow pl-4 mb-12">
+                  <h3 className="text-4xl font-display font-bold uppercase border-l-4 border-best-yellow pl-4 mb-12">
                     {(t as any).board.gallery}
                   </h3>
+
+                  {/* Grid-ul de poze */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+                    {[
+                      { id: 1, source: teamPhoto},
+                      { id: 2, source: '#'},
+                      { id: 3, source: '#'},
+                      { id: 4, source: '#'},
+                      { id: 5, source: '#'},
+                      { id: 6, source: '#'},
+                      { id: 7, source: '#'},
+                      { id: 8, source: '#'},
+                    ].map((item, i) => (
                       <motion.div
-                        key={item}
+                        key={i}
                         whileHover={{ scale: 1.02 }}
-                        className="aspect-square bg-white/5 overflow-hidden filter grayscale hover:grayscale-0 transition-all cursor-crosshair border border-white/10"
+                        onClick={() => setSelectedImage(item.source)} // <-- Deschide imaginea la click
+                        className="aspect-square bg-white/5 overflow-hidden filter grayscale hover:grayscale-0 transition-all cursor-zoom-in border border-white/10"
                       >
                         <img 
-                          src={`https://images.unsplash.com/photo-${1500000000000 + item * 1000}?auto=format&fit=crop&q=80&w=800`} 
+                          src={item.source} 
                           alt="Gallery item"
                           className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
                           referrerPolicy="no-referrer"
@@ -507,7 +588,46 @@ export default function App() {
                       </motion.div>
                     ))}
                   </div>
+
+                  {/* MODAL / LIGHTBOX (Apare doar când selectedImage nu este null) */}
+                  <AnimatePresence>
+                    {selectedImage && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedImage(null)} // <-- Închide modalul la click ÎN AFARĂ
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10 cursor-pointer"
+                      >
+                        {/* Butonul X - Poziționat în STÂNGA SUS */}
+                        <button
+                          onClick={() => setSelectedImage(null)} // <-- Închide modalul la click pe X
+                          className="absolute top-6 left-6 z-10 p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black rounded-full transition-all text-white cursor-pointer"
+                          aria-label="Închide"
+                        >
+                          <X className="w-6 h-6" />
+                        </button>
+
+                        {/* Containerul Imaginii Mărite */}
+                        <motion.div
+                          initial={{ scale: 0.85, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          exit={{ scale: 0.85, opacity: 0 }}
+                          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                          onClick={(e) => e.stopPropagation()} // <-- ÎMPIEDICĂ închiderea când dai click direct pe POZĂ
+                          className="relative max-w-5xl max-h-[85vh] overflow-hidden border border-white/20 shadow-2xl cursor-default"
+                        >
+                          <img
+                            src={selectedImage}
+                            alt="Expanded Memory"
+                            className="w-full h-full object-contain max-h-[85vh]"
+                          />
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
+
               </div>
             </section>
 
@@ -529,7 +649,7 @@ export default function App() {
                   {/* Roadmap Line */}
                   <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/20 -translate-x-1/2 hidden md:block" />
 
-                  <div className="space-y-40">
+                  <div className="space-y-20">
                     {[
                       { type: 'mission', data: (t as any).roadmap?.mission, icon: ArrowRight },
                       { type: 'vision', data: (t as any).roadmap?.vision, icon: Globe },
@@ -566,11 +686,11 @@ export default function App() {
               </div>
             </section>
 
-            {/* Impact Section */}
+            {/* Core Pillar Section */}
             <section id="impact" className="py-16 bg-best-yellow text-best-black overflow-hidden relative border-y border-best-black">
               <div className="container mx-auto px-0 relative z-10">
-                <div className="max-w-4xl mb-16">
-                  <h2 className="text-7xl md:text-9xl font-display font-black uppercase tracking-tighter mb-8 italic leading-[0.8]">
+                <div className="max-w-4xl mb-16 ml-5 mr-5">
+                  <h2 className="text-5xl md:text-9xl font-display font-black uppercase tracking-tighter mb-8 italic leading-[0.8]">
                     {(t as any).impact?.title}
                   </h2>
                   <p className="text-4xl font-light italic uppercase tracking-tight max-w-2xl text-best-black/80">
@@ -593,7 +713,7 @@ export default function App() {
                       className="bg-best-black text-white p-10 group hover:bg-white hover:text-best-black transition-all duration-700 min-h-[500px] flex flex-col justify-between"
                     >
                       <div>
-                        <item.icon className= "w-20 h-20 text-best-yellow mb-20 group-hover:scale-125 transition-transform duration-500 origin-left" />
+                        <item.icon className= "w-20 h-20 text-best-yellow mb-10 group-hover:scale-125 transition-transform duration-500 origin-left" />
                         <h3 className="text-5xl font-display font-black uppercase mb-10 italic tracking-tighter leading-none group-hover:text-best-black">
                           {item.data?.title}
                         </h3>
@@ -676,6 +796,18 @@ export default function App() {
           </motion.div>
         )}
 
+        {currentRoute === 'all-projects' && (
+          <motion.div
+            key="partners-strategic"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ProjectsPage t={t} lang={lang} />
+          </motion.div>
+        )}
+
         {currentRoute === 'scholarships' && (
           <motion.div
             key="scholarships"
@@ -726,30 +858,30 @@ export default function App() {
       </AnimatePresence>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 bg-best-yellow">
-        <div className="container mx-auto px-6 text-best-black">
-          <div className="grid md:grid-cols-2 gap-16">
+      <section id="contact" className="py-16 bg-best-yellow overflow-hidden">
+        <div className="container mx-auto px-6 md:px-50 text-best-black max-w-full">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
             <div>
-              <h2 className="text-5xl md:text-7xl font-display font-bold uppercase leading-none mb-12">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold uppercase leading-none mb-12">
                 {lang == 'ro' ? (<>Intra in<br/>Contact</>) : (<>Get in<br/>touch</>)}
               </h2>
               <div className="space-y-8">
                 <a 
                   href="mailto:contact@bestis.ro"
                   className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-best-black flex items-center justify-center text-white">
+                  <div className="w-12 h-12 bg-best-black flex items-center justify-center text-white shrink-0">
                     <Mail className="w-6 h-6" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="text-xs uppercase font-bold tracking-widest opacity-60">Email</div>
-                    <div className="text-xs font-bold">contact@bestis.ro</div>
+                    <div className="text-xs font-bold truncate">contact@bestis.ro</div>
                   </div>
                 </a>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-best-black flex items-center justify-center text-white">
+                  <div className="w-12 h-12 bg-best-black flex items-center justify-center text-white shrink-0">
                     <Users className="w-6 h-6" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="text-xs uppercase font-bold tracking-widest opacity-60">Address</div>
                     <div className="text-xs font-bold">Cămin T19, Aleea Profesor Gheorghe Alexa, Iași</div>
                   </div>
@@ -757,34 +889,39 @@ export default function App() {
               </div>
             </div>
             
-            <div className="bg-best-black text-white p-10 flex flex-col justify-between">
+            {/* Schimbat p-10 în p-6 pe mobil, p-10 pe desktop */}
+            <div className="bg-best-black text-white p-6 md:p-10 flex flex-col justify-between">
               <div>
-                <h3 className="text-3xl font-display font-bold mb-6">{lang == 'ro' ? 'Conectează-te cu noi' : 'Connect with us'}</h3>
-                <p className="text-white/60 mb-10 max-w-sm">
+                <h3 className="text-2xl md:text-3xl font-display font-bold mb-6">
+                  {lang == 'ro' ? 'Conectează-te cu noi' : 'Connect with us'}
+                </h3>
+                <p className="text-white/60 mb-8 max-w-sm text-sm">
                   { lang == 'ro' ?
                     'Urmărește-ne pe rețelele sociale pentru noutăți în timp real despre proiecte, evenimente și burse.' :
                     'Follow us on social media for real-time updates on projects, events, and scholarships.'
                   }
                 </p>
-                <div className="flex gap-6 mb-12">
+
+                {/* Corectat: flex-wrap și gap-3 pe mobil ca să nu spargă ecranul */}
+                <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-6 mb-8">
                   <a target="_blank" href="https://www.instagram.com/bestiasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
-                    <Instagram className="w-6 h-6" />
+                    <Instagram className="w-5 h-5 md:w-6 md:h-6" />
                   </a>
                   <a target="_blank" href="https://www.facebook.com/bestiasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
-                    <Facebook className="w-6 h-6" />
+                    <Facebook className="w-5 h-5 md:w-6 md:h-6" />
                   </a>
                   <a target="_blank" href="https://www.linkedin.com/company/best-iasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
-                    <Linkedin className="w-6 h-6" />
+                    <Linkedin className="w-5 h-5 md:w-6 md:h-6" />
                   </a>
                   <a target="_blank" href="https://www.youtube.com/@BESTIasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
-                    <Play className="w-6 h-6" />
+                    <Play className="w-5 h-5 md:w-6 md:h-6" />
                   </a>
                   <a target="_blank" href="https://www.tiktok.com/@best.iasi" className="p-3 bg-white/10 hover:bg-best-yellow hover:text-best-black transition-all">
-                    <Music2 className="w-6 h-6" />
+                    <Music2 className="w-5 h-5 md:w-6 md:h-6" />
                   </a>
                 </div>
               </div>
-              <p className="text-xs uppercase tracking-widest font-bold opacity-30">
+              <p className="text-[10px] md:text-xs uppercase tracking-widest font-bold opacity-30 mt-4">
                 BEST IASI - LOCAL BEST GROUP
               </p>
             </div>
@@ -794,20 +931,293 @@ export default function App() {
 
       {/* Footer */}
       <footer className="py-12 border-t border-white/5">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <img 
+        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 items-center gap-6 text-center">
+          
+          {/* LOGO */}
+          <div className="flex justify-center md:justify-start">
+            <img 
               src={logoIasiBest} 
               alt="BEST Iasi Logo" 
-              className="w-40 object-contain transition-transform group-hover:scale-105 pr-0" 
+              className="w-40 object-contain transition-transform group-hover:scale-105" 
             />
+          </div>
+
+          {/* RIGHTS LOGO */}
           <p className="text-sm text-white/40">
             {t.footer.rights}
           </p>
-          <div className="flex gap-8 text-xs uppercase font-bold tracking-widest opacity-40">
-            <a href="#" className="hover:opacity-100 transition-opacity">GDPR</a>
+
+          {/* GDPR */}
+          <div className="flex justify-center md:justify-end gap-8 text-xs uppercase font-bold tracking-widest opacity-40">
+            <a 
+              href="https://docs.google.com/document/d/1UUIE_xTX4uwiUZ25O6p1tQD59dmHHb0Y3DKPbrUdNcA/edit?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:opacity-100 transition-opacity"
+            >
+              GDPR
+            </a>
           </div>
+
         </div>
       </footer>
+    </div>
+  );
+}
+
+function ProjectsPage({ t, lang }: { t: any; lang: string }) {
+  const [activeTab, setActiveTab] = useState('all');
+
+  // Datele proiectelor integrate direct în componentă
+  const projectsData = [
+    // --- EVENTS External ---
+    {
+      id: 'courses',
+      category: 'external',
+      name: t?.projects?.courses?.name || 'BEST Seasonal Courses',
+      desc: t?.projects?.courses?.desc || (lang === 'ro' ? 'Cursuri academice de vară și iarnă organizate în peste 80 de universități din Europa.' : 'Seasonal academic courses organized across Europe for technology students.'),
+      color: 'bg-best-yellow',
+      link: 'https://www.best.eu.org/courses/welcome.jsp',
+      image: coursesLogo
+    },
+    {
+      id: 'symposium',
+      category: 'external',
+      name: t?.projects?.symposium?.name || 'BEST Innovation Symposium',
+      desc: t?.projects?.symposium?.desc || (lang === 'ro' ? 'Simpozion educațional dedicat inovației, aducând studenții și companiile la aceeași masă.' : 'Educational symposium bringing students and companies together for tech innovation.'),
+      color: 'bg-best-yellow',
+      link: 'https://symposium.bestis.ro/',
+      image: bisLogo
+    },
+    {
+      id: 'proveit',
+      category: 'external',
+      name: t?.projects?.proveit?.name || 'Prove IT',
+      desc: t?.projects?.proveit?.desc || (lang === 'ro' ? 'Concurs intensiv de programare și dezvoltare software creat pentru studenții pasionați.' : 'Intensive software development and competitive programming contest.'),
+      color: 'bg-best-yellow',
+      link: 'https://proveit.bestis.ro/',
+      image: proveitLogo
+    },
+
+    // --- EVENTS Internal ---
+    {
+      id: 'mw',
+      category: 'internal',
+      name: 'Motivational Weekend',
+      desc: lang === 'ro' 
+        ? 'Sesiuni de formare internă axate pe Public Speaking, Project Management, Soft Skills și Leadership.' 
+        : 'Internal training sessions focused on soft skills, public speaking, and project management.',
+      color: 'bg-blue-500',
+      link: '',
+      image: logoBest
+    },
+    {
+      id: 'aniversare',
+      category: 'internal',
+      name: 'Aniversare Interna',
+      desc: lang === 'ro'
+        ? 'Schimburi culturale internaționale de o săptămână cu alte grupuri locale BEST din Europa.'
+        : 'One-week international cultural exchanges with other Local BEST Groups across Europe.',
+      color: 'bg-emerald-500',
+      link: '',
+      image: logoBest
+    },
+    {
+      id: 'rm',
+      category: 'internal',
+      name: 'Regional Meeting',
+      desc: lang === 'ro'
+        ? 'Schimburi culturale internaționale de o săptămână cu alte grupuri locale BEST din Europa.'
+        : 'One-week international cultural exchanges with other Local BEST Groups across Europe.',
+      color: 'bg-emerald-500',
+      link: '',
+      image: logoBest
+    },
+
+    // --- ARCHIVE (Evenimente vechi / Trecute) ---
+    {
+      id: 'ebec',
+      category: 'archive',
+      name: 'eBEC',
+      desc: lang === 'ro'
+        ? 'European BEST Engineering Competition — faza locală a celei mai mari competiții inginerești din Europa.'
+        : 'European BEST Engineering Competition — local round of the European engineering contest.',
+      color: 'bg-purple-500',
+      link: '',
+      image: logoBest
+    },
+    {
+      id: 'ibec',
+      category: 'archive',
+      name: 'iBEC',
+      desc: lang === 'ro'
+        ? 'Ediții anterioare de maratoane de codare de 24 de ore organizate de grupul nostru local.'
+        : 'Past editions of 24-hour coding marathons organized by our local group.',
+      color: 'bg-orange-500',
+      link: '',
+      image: logoBest
+    },
+    {
+      id: 'summer',
+      category: 'archive',
+      name: 'Summer Course',
+      desc: lang === 'ro'
+        ? 'Ediții anterioare de maratoane de codare de 24 de ore organizate de grupul nostru local.'
+        : 'Past editions of 24-hour coding marathons organized by our local group.',
+      color: 'bg-orange-500',
+      link: '',
+      image: logoBest
+    },
+    {
+      id: 'jobshop',
+      category: 'archive',
+      name: 'JobShop',
+      desc: lang === 'ro'
+        ? 'Ediții anterioare de maratoane de codare de 24 de ore organizate de grupul nostru local.'
+        : 'Past editions of 24-hour coding marathons organized by our local group.',
+      color: 'bg-orange-500',
+      link: '',
+      image: logoBest
+    },
+    {
+      id: 'cafenea',
+      category: 'archive',
+      name: 'Cafeneaua Inginerilor',
+      desc: lang === 'ro'
+        ? 'Ediții anterioare de maratoane de codare de 24 de ore organizate de grupul nostru local.'
+        : 'Past editions of 24-hour coding marathons organized by our local group.',
+      color: 'bg-orange-500',
+      link: '',
+      image: logoBest
+    },
+    {
+      id: 'engage',
+      category: 'archive',
+      name: 'Engage',
+      desc: lang === 'ro'
+        ? 'Ediții anterioare de maratoane de codare de 24 de ore organizate de grupul nostru local.'
+        : 'Past editions of 24-hour coding marathons organized by our local group.',
+      color: 'bg-orange-500',
+      link: '',
+      image: logoBest
+    }
+  ];
+
+  const categories = [
+    { id: 'all', label: lang === 'ro' ? 'Toate' : 'All' },
+    { id: 'external', label: lang === 'ro' ? 'Evenimente Externe' : 'External Events' },
+    { id: 'internal', label: lang === 'ro' ? 'Evenimente Interne' : 'Internal Events' },
+    { id: 'archive', label: lang === 'ro' ? 'Arhivă' : 'Archive' },
+  ];
+
+  const filteredProjects = activeTab === 'all' 
+    ? projectsData 
+    : projectsData.filter(p => p.category === activeTab);
+
+  return (
+    <div className="pt-32 pb-24 text-white">
+      {/* Page Hero */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-best-yellow/5 rounded-full blur-[120px]" />
+        <div className="container mx-auto px-6 relative z-10">
+          <a 
+            href="#/" 
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-white/50 hover:text-best-yellow transition-colors mb-8"
+          >
+            <ArrowLeft className="w-4 h-4" /> 
+            {lang === 'ro' ? 'Înapoi la Acasă' : 'Back to Home'}
+          </a>
+          <h1 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter mb-6 leading-none">
+            {lang === 'ro' ? 'Toate Proiectele' : 'All Projects'}
+          </h1>
+          <p className="text-xl md:text-2xl text-white/60 max-w-3xl font-light">
+            {lang === 'ro'
+              ? 'Descoperă toate inițiativele noastre: de la proiecte cu tradiție, la evenimente interne și arhiva activităților BEST Iași.'
+              : 'Discover all our initiatives: from main flagship projects to internal events and full historical archives.'}
+          </p>
+        </div>
+      </section>
+
+      {/* Grid & Tabs Section */}
+      <section className="py-12 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          
+          {/* Categorii / Meniu Tab-uri */}
+          <div className="flex flex-wrap gap-3 mb-12 border-b border-white/10 pb-6">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveTab(cat.id)}
+                className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-all cursor-pointer ${
+                  activeTab === cat.id
+                    ? 'bg-best-yellow text-best-black'
+                    : 'bg-white/5 hover:bg-white/10 text-white/70'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Grid Proiecte Animat */}
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence>
+              {filteredProjects.map((proj) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  key={proj.id}
+                  className="group relative h-[420px] bg-best-black border border-white/5 overflow-hidden p-8 flex flex-col justify-end"
+                >
+                  {/* Badge Categorie */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 bg-white/10 text-white/80 backdrop-blur-sm">
+                      {categories.find(c => c.id === proj.category)?.label || proj.category}
+                    </span>
+                  </div>
+
+                  <img 
+                    src={proj.image} 
+                    alt={proj.name} 
+                    className="w-64 mx-auto object-contain transition-transform group-hover:scale-105 mb-auto pt-8"
+                    style={{
+                      WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)',
+                      maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent), linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)',
+                      WebkitMaskComposite: 'source-in',
+                      maskComposite: 'intersect',
+                    }}
+                  />
+
+                  <div className={`absolute top-0 right-0 w-32 h-32 ${proj.color || 'bg-best-yellow'} opacity-10 group-hover:opacity-20 transition-opacity blur-3xl`} />
+                  <div className={`w-8 h-1 mb-6 ${proj.color || 'bg-best-yellow'}`} />
+
+                  <h3 className="text-2xl font-display font-bold mb-3 uppercase tracking-tight">
+                    {proj.name}
+                  </h3>
+                  
+                  <p className="text-sm text-white/50 leading-relaxed group-hover:text-white/80 transition-colors line-clamp-3">
+                    {proj.desc}
+                  </p>
+
+                  {proj.link ? (
+                    <a target="_blank" rel="noopener noreferrer" href={proj.link}>
+                      <div className="mt-6 flex items-center gap-2 text-xs font-bold text-best-yellow uppercase tracking-widest cursor-pointer group-hover:translate-x-1 transition-transform">
+                        {lang === 'ro' ? 'Află detalii' : 'Learn more'} <ArrowRight className="w-3 h-3" />
+                      </div>
+                    </a>
+                  ) : (
+                    <div className="mt-6 h-4" />
+                  )}
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+        </div>
+      </section>
     </div>
   );
 }
@@ -830,18 +1240,6 @@ function ScholarshipsPage({ t, lang }: { t: any; lang: string }) {
 
   return (
     <div className="pt-32 pb-24 text-white">
-      {/* NOU: Butonul de test/previzualizare */}
-      <div className="container mx-auto px-6 mb-8 flex justify-end">
-        <button 
-          onClick={() => setHasActiveScholarships(!hasActiveScholarships)}
-          className="px-4 py-2 bg-white/10 hover:bg-best-yellow hover:text-best-black text-xs uppercase font-bold tracking-widest transition-all border border-white/20 rounded"
-        >
-          {hasActiveScholarships 
-            ? (lang === 'ro' ? 'Vezi varianta actuala (In curand) | Butonul nu va fi aici cand site-ul va fi lansat' : 'See current version (Coming soon) | This button won\'t be here when the site will be launched')
-            : (lang === 'ro' ? 'Previzualizeaza pagina completa | Butonul nu va fi aici cand site-ul va fi lansat' : 'Preview full page | This button won\'t be here when the site will be launched')
-          }
-        </button>
-      </div>
       {/* Page Hero */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-best-yellow/5 rounded-full blur-[120px]" />
@@ -858,7 +1256,7 @@ function ScholarshipsPage({ t, lang }: { t: any; lang: string }) {
         </div>
       </section>
 
-      {!hasActiveScholarships ? (
+
         <section className="py-24 border-t border-white/5">
           <div className="container mx-auto px-6 text-center max-w-2xl">
             <div className="inline-block p-4 bg-best-yellow/10 text-best-yellow rounded-full mb-6 animate-pulse">
@@ -868,181 +1266,10 @@ function ScholarshipsPage({ t, lang }: { t: any; lang: string }) {
               {lang === 'ro' ? 'Bursele BEST urmează în curând!' : 'BEST Scholarships are coming soon!'}
             </h2>
             <p className="text-white/60 text-lg font-light leading-relaxed mb-8">
-              {lang === 'ro' 
-                ? 'În acest moment nu avem sesiuni de burse active. Lucrăm intens la detalii, iar platforma de înscrieri se va deschide în perioada următoare. Apasă pe butonul de previzualizare de mai sus pentru a vedea cum va arăta pagina când dăm startul!'
-                : 'There are currently no active scholarship sessions. We are working hard on the details, and the application platform will open soon. Click the preview button above to see what the page will look like when we launch!'}
+              {lang === 'ro' ? s.inwork : s.inwork}
             </p>
           </div>
         </section>
-      ) : (
-      <>
-      {/* Criteria & Info */}
-      <section className="py-16 border-t border-white/5 bg-best-dark/30">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-12 tracking-tight text-best-yellow italic">
-            {s.criteriaTitle}
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {s.criteria.map((item: string, i: number) => (
-              <div key={i} className="p-8 bg-white/5 border border-white/10 hover:border-best-yellow/35 transition-all group duration-300 rounded-lg backdrop-blur-sm">
-                <div className="w-12 h-12 rounded-full bg-best-yellow/10 flex items-center justify-center text-best-yellow mb-6 group-hover:bg-best-yellow group-hover:text-best-black transition-colors duration-300">
-                  <CheckCircle2 className="w-6 h-6" />
-                </div>
-                <p className="text-white/80 leading-relaxed font-light text-sm">
-                  {item}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline / Calendar */}
-      <section className="py-20 border-t border-white/5">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-16 tracking-tight text-center italic">
-            {s.calendarTitle}
-          </h2>
-          <div className="max-w-3xl mx-auto relative">
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
-            
-            <div className="space-y-12">
-              {s.calendar.map((item: any, i: number) => (
-                <div key={i} className={`flex flex-col md:flex-row items-start ${i % 2 === 0 ? 'md:flex-row-reverse' : ''} relative`}>
-                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-best-yellow rounded-full -translate-x-1/2 border-4 border-best-black z-10" />
-                  
-                  <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-8">
-                    <div className={`p-6 bg-white/5 border border-white/5 rounded-lg group hover:border-best-yellow/30 transition-all duration-300 ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                      <span className="inline-block px-3 py-1 bg-best-yellow/15 text-best-yellow font-bold text-xs uppercase tracking-wider mb-3 rounded">
-                        {item.date}
-                      </span>
-                      <p className="text-white/80 leading-relaxed text-sm font-light">
-                        {item.step}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="hidden md:block w-1/2" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 border-t border-white/5 bg-best-dark/20">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-16 tracking-tight text-center italic">
-            {s.faqTitle}
-          </h2>
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-            {s.faq.map((item: any, i: number) => (
-              <div key={i} className="p-8 bg-white/5 border border-white/5 hover:border-best-yellow/20 hover:bg-white/10 transition-all rounded-lg duration-300">
-                <div className="flex items-start gap-4 mb-4">
-                  <HelpCircle className="w-6 h-6 text-best-yellow shrink-0 mt-1" />
-                  <h3 className="font-display font-bold text-lg text-white">
-                    {item.q}
-                  </h3>
-                </div>
-                <p className="text-white/60 leading-relaxed text-sm pl-10 font-light">
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Application Form */}
-      <section className="py-20 border-t border-white/5">
-        <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto p-10 bg-white/5 border border-white/10 rounded-2xl relative overflow-hidden backdrop-blur-md">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-best-yellow/5 rounded-full blur-[80px]" />
-            <h2 className="text-3xl font-display font-bold uppercase mb-8 tracking-tight text-center text-best-yellow italic">
-              {s.formTitle}
-            </h2>
-
-            {formSubmitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-8 border border-best-yellow bg-best-yellow/10 text-center rounded-lg"
-              >
-                <Award className="w-16 h-16 text-best-yellow mx-auto mb-4 animate-bounce" />
-                <p className="text-xl font-bold text-white mb-2">{s.formSuccess}</p>
-                <p className="text-sm text-white/60">{lang === 'ro' ? 'Vă vom contacta în curând pentru confirmarea detaliilor.' : 'We will contact you shortly to confirm the details.'}</p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="space-y-6 relative z-10">
-                <div>
-                  <label className="block text-xs uppercase tracking-wider font-bold text-white/50 mb-2">{s.formName}</label>
-                  <input 
-                    type="text" 
-                    required 
-                    value={formData.name}
-                    onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full bg-best-black border border-white/10 p-4 focus:border-best-yellow focus:outline-none transition-colors text-white" 
-                  />
-                </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider font-bold text-white/50 mb-2">{s.formEmail}</label>
-                    <input 
-                      type="email" 
-                      required 
-                      value={formData.email}
-                      onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                      className="w-full bg-best-black border border-white/10 p-4 focus:border-best-yellow focus:outline-none transition-colors text-white" 
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider font-bold text-white/50 mb-2">{s.formFaculty}</label>
-                    <input 
-                      type="text" 
-                      required 
-                      value={formData.faculty}
-                      onChange={e => setFormData(prev => ({ ...prev, faculty: e.target.value }))}
-                      className="w-full bg-best-black border border-white/10 p-4 focus:border-best-yellow focus:outline-none transition-colors text-white" 
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-wider font-bold text-white/50 mb-2">{s.formYear}</label>
-                  <select 
-                    value={formData.year}
-                    onChange={e => setFormData(prev => ({ ...prev, year: e.target.value }))}
-                    className="w-full bg-best-black border border-white/10 p-4 focus:border-best-yellow focus:outline-none transition-colors text-white"
-                  >
-                    <option value="1">{lang === 'ro' ? 'Anul I' : 'Year I'}</option>
-                    <option value="2">{lang === 'ro' ? 'Anul II' : 'Year II'}</option>
-                    <option value="3">{lang === 'ro' ? 'Anul III' : 'Year III'}</option>
-                    <option value="4">{lang === 'ro' ? 'Anul IV' : 'Year IV'}</option>
-                    <option value="5">{lang === 'ro' ? 'Master / Doctorat' : 'Master / PhD'}</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-wider font-bold text-white/50 mb-2">{s.formMotivation}</label>
-                  <textarea 
-                    rows={4} 
-                    required 
-                    value={formData.motivation}
-                    onChange={e => setFormData(prev => ({ ...prev, motivation: e.target.value }))}
-                    className="w-full bg-best-black border border-white/10 p-4 focus:border-best-yellow focus:outline-none transition-colors text-white resize-none" 
-                  />
-                </div>
-                <button 
-                  type="submit" 
-                  className="w-full py-4 bg-best-yellow text-best-black font-display font-bold uppercase tracking-widest hover:bg-white transition-colors flex items-center justify-center gap-3 cursor-pointer"
-                >
-                  {s.formSubmit} <Send className="w-4 h-4" />
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
-      </>
-      )}
     </div>
   );
 }
@@ -1064,28 +1291,6 @@ function StrategicPartnersPage({ t, lang }: { t: any; lang: string }) {
           <p className="text-xl md:text-2xl text-white/60 max-w-3xl font-light">
             {sp.intro}
           </p>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-16 border-t border-white/5 bg-best-dark/30">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-12 tracking-tight text-center text-best-yellow italic">
-            {sp.benefitsTitle}
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {sp.benefits.map((benefit: string, i: number) => (
-              <div key={i} className="p-8 bg-white/5 border border-white/5 hover:border-best-yellow/30 transition-all rounded-lg flex gap-6 group duration-300">
-                <div className="w-12 h-12 bg-best-yellow/10 rounded-lg flex items-center justify-center text-best-yellow shrink-0 group-hover:bg-best-yellow group-hover:text-best-black transition-colors duration-300">
-                  <Award className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-lg mb-2 text-white/90">{lang == 'ro' ? 'Beneficiu' : 'Benefit' } {i + 1}</h3>
-                  <p className="text-white/60 leading-relaxed text-sm font-light">{benefit}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -1152,41 +1357,6 @@ function AnnualPartnersPage({ t, lang }: { t: any; lang: string }) {
         </div>
       </section>
 
-      {/* Packages Section */}
-      <section className="py-16 border-t border-white/5 bg-best-dark/30">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-12 tracking-tight text-center text-best-yellow italic">
-            {ap.packagesTitle}
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {ap.packages.map((pkg: any, i: number) => {
-              const borderStyles = i === 0 
-                ? 'border-best-yellow/30 hover:border-best-yellow bg-best-yellow/5' 
-                : i === 1 
-                ? 'border-white/10 hover:border-white/30 bg-white/5' 
-                : 'border-white/5 hover:border-white/15 bg-white/5';
-              return (
-                <div key={i} className={`p-8 border ${borderStyles} transition-all rounded-lg flex flex-col justify-between group duration-300`}>
-                  <div>
-                    <span className={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider mb-6 rounded ${i === 0 ? 'bg-best-yellow text-best-black' : 'bg-white/10 text-white'}`}>
-                      {pkg.name}
-                    </span>
-                    <p className="text-white/70 leading-relaxed text-sm mb-8 font-light">
-                      {pkg.desc}
-                    </p>
-                  </div>
-                  <div className="border-t border-white/10 pt-6 mt-auto">
-                    <span className="text-xs uppercase font-bold tracking-widest text-white/40 group-hover:text-best-yellow transition-colors duration-300">
-                      {lang === 'ro' ? 'Beneficii Event' : 'Event Benefits'}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Annual Partners Grid */}
       <section className="py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
@@ -1225,23 +1395,6 @@ function ReportPage({ t, lang }: { t: any; lang: string }) {
           <p className="text-xl md:text-2xl text-white/60 max-w-3xl font-light">
             {rp.intro}
           </p>
-        </div>
-      </section>
-
-      {/* Stats Dashboard */}
-      <section className="py-16 border-t border-white/5 bg-best-dark/30">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-12 tracking-tight text-center text-best-yellow italic">
-            {rp.statsTitle}
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {rp.stats.map((stat: any, i: number) => (
-              <div key={i} className="p-8 bg-best-black border border-white/10 hover:border-best-yellow/40 transition-colors duration-300 text-center rounded-lg">
-                <div className="text-5xl font-display font-black text-best-yellow mb-3 italic tracking-tight">{stat.value}</div>
-                <div className="text-xs uppercase tracking-widest text-white/50">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
