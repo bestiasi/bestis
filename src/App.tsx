@@ -1331,7 +1331,7 @@ function StrategicPartnersPage({ t, lang }: { t: any; lang: string }) {
               { name: 'Fundatia pentru Dezvoltarea Societatii Civile', source: fdscLogo, link: lang === 'ro' ? 'https://www.fdsc.ro/' : 'https://www.fdsc.ro/en/home/'},
               { name: 'BRD - Groupe Société Générale', source: brdLogo, link: lang === 'ro' ? 'https://www.brd.ro/' : 'https://www.brd.ro/en'},
               { name: 'Fermador', source: fermadorLogo, link: lang === 'ro' ? 'https://www.fermador.ro/' : 'https://www.fermador.ro/?lang=en'},
-              { name: 'Amma Group', source: ammaLogo, link: 'https://www.amma-group.com/'}
+              { name: 'Amma Group', source: ammaLogo, link: 'https://www.migdalin.ro/'}
             ].map((partner, i) => (
               <div key={i} className="h-50 md:h-80 bg-white/5 border border-white/5 hover:border-best-yellow/30 transition-all flex flex-col justify-center items-center rounded-lg p-6 group duration-300 cursor-pointer">
                 <img
