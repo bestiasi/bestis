@@ -15,7 +15,7 @@
 =====15.poza cu noi ca LBG in dreapta, de la cabana maybe, fix cum intri
 =====16.textul are 128px -> 100px cel de landing page
 17.nu este consistenta in dimensiunea textelor 72px vs 92p(consiliul de conducere vs viziunea noastra in actiune)
-18.pagina de parteneri strategici exte uncta, dar avem si in footer cta
+=====18.pagina de parteneri strategici exte uncta, dar avem si in footer cta
 19.poate implementam best spirit la noi pe site in loc de "cursuri si evenimente"
 20.alb in spate la fontul de la BIS
 =====21.sectiunea legata de impact sa fie core pillars si piloni de activitate best

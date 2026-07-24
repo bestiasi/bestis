@@ -38,8 +38,18 @@ import logoBest from './assets/logos/SiglaBestColor.png';
 import logoIasiBest from './assets/logos/BestIasiSince200.png'
 import proveitLogo from './assets/logos/proveitLogo.png';
 import coursesLogo from './assets/logos/coursesLogo.png';
-import bisLogo from './assets/logos/bisLogo.png';
+import bisLogo from './assets/logos/sigla_bis.png';
+
+// Memories
 import teamPhoto from './assets/gallery/poza_izvor.jpg';
+import aniversarePhoto from './assets/gallery/aniversare.jpg';
+import proveitPhoto from './assets/gallery/proveit_beneficii.jpg';
+import secretSantaPhoto from './assets/gallery/secret_santa.jpg';
+import recrutariPhoto from './assets/gallery/recrutari.jpg';
+import festudiesPhoto from './assets/gallery/festudies.jpg';
+import paxiPhoto from './assets/gallery/paxi.jpg';
+import piatraNeamtPhoto from './assets/gallery/piatraNeamt.jpg';
+
 
 // Board pictures
 import presidentPicture from './assets/board/dani.webp';
@@ -53,6 +63,13 @@ import prPFP from './assets/departament/pretzel.jpg';
 import hrPFP from './assets/departament/castor.jpg';
 import itPFP from './assets/departament/grigore.jpg';
 import frPFP from './assets/departament/leo.jpg';
+
+// Strategic Partners Logos
+import ffffLogo from './assets/logos/strategici/friendsForFriends.svg';
+import fdscLogo from './assets/logos/strategici/fdsc.png';
+import brdLogo from './assets/logos/strategici/brd.jpg';
+import fermadorLogo from './assets/logos/strategici/fermador.svg';
+import ammaLogo from './assets/logos/strategici/amma.webp';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('ro');
@@ -484,7 +501,6 @@ export default function App() {
                       {/* Image Slot */}
                       <div className="aspect-video bg-white/5 grayscale group-hover:grayscale-0 transition-all overflow-hidden relative">
                         <div className="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40">
-                          <dept.icon className="w-12 h-12 text-white group-hover:text-best-black" />
                         </div>
                         <img 
                           src={dept.source} 
@@ -565,13 +581,13 @@ export default function App() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
                       { id: 1, source: teamPhoto},
-                      { id: 2, source: '#'},
-                      { id: 3, source: '#'},
-                      { id: 4, source: '#'},
-                      { id: 5, source: '#'},
-                      { id: 6, source: '#'},
-                      { id: 7, source: '#'},
-                      { id: 8, source: '#'},
+                      { id: 2, source: aniversarePhoto},
+                      { id: 3, source: paxiPhoto},
+                      { id: 4, source: festudiesPhoto},
+                      { id: 5, source: piatraNeamtPhoto},
+                      { id: 6, source: recrutariPhoto},
+                      { id: 7, source: proveitPhoto},
+                      { id: 8, source: secretSantaPhoto},
                     ].map((item, i) => (
                       <motion.div
                         key={i}
@@ -883,7 +899,7 @@ export default function App() {
                   </div>
                   <div className="min-w-0">
                     <div className="text-xs uppercase font-bold tracking-widest opacity-60">Address</div>
-                    <div className="text-xs font-bold">Cămin T19, Aleea Profesor Gheorghe Alexa, Iași</div>
+                    <div className="text-xs font-bold" onClick={() => window.open("https://maps.app.goo.gl/vwdRt9koSKjnvqhx6", "_blank")}>Cămin T19, Aleea Profesor Gheorghe Alexa, Iași</div>
                   </div>
                 </div>
               </div>
@@ -996,6 +1012,15 @@ function ProjectsPage({ t, lang }: { t: any; lang: string }) {
       desc: t?.projects?.proveit?.desc || (lang === 'ro' ? 'Concurs intensiv de programare și dezvoltare software creat pentru studenții pasionați.' : 'Intensive software development and competitive programming contest.'),
       color: 'bg-best-yellow',
       link: 'https://proveit.bestis.ro/',
+      image: proveitLogo
+    },
+    {
+      id: 'recrutari',
+      category: 'external',
+      name: 'Recrutari',
+      desc: t?.projects?.proveit?.desc || (lang === 'ro' ? 'Concurs intensiv de programare și dezvoltare software creat pentru studenții pasionați.' : 'Intensive software development and competitive programming contest.'),
+      color: 'bg-best-yellow',
+      link: 'https://recrutari.bestis.ro/',
       image: proveitLogo
     },
 
@@ -1300,39 +1325,40 @@ function StrategicPartnersPage({ t, lang }: { t: any; lang: string }) {
           <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-12 tracking-tight text-center text-best-yellow italic">
             {sp.currentTitle}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto items-center">
-            {['Companie1', 'Companie2', 'Companie3', 'Companie4'].map((partner, i) => (
-              <div key={i} className="h-40 bg-white/5 border border-white/5 hover:border-best-yellow/30 transition-all flex flex-col justify-center items-center rounded-lg p-6 group duration-300 cursor-pointer">
-                <Building2 className="w-12 h-12 text-white/20 group-hover:text-best-yellow transition-colors mb-3" />
-                <div className="text-lg font-display font-bold uppercase italic tracking-wider text-white/60 group-hover:text-white transition-colors">
-                  {partner}
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
+            {[
+              { name: 'Fundatia Friends for Friends', source: ffffLogo, link: 'https://www.ffff.ro/'},
+              { name: 'Fundatia pentru Dezvoltarea Societatii Civile', source: fdscLogo, link: lang === 'ro' ? 'https://www.fdsc.ro/' : 'https://www.fdsc.ro/en/home/'},
+              { name: 'BRD - Groupe Société Générale', source: brdLogo, link: lang === 'ro' ? 'https://www.brd.ro/' : 'https://www.brd.ro/en'},
+              { name: 'Fermador', source: fermadorLogo, link: lang === 'ro' ? 'https://www.fermador.ro/' : 'https://www.fermador.ro/?lang=en'},
+              { name: 'Amma Group', source: ammaLogo, link: 'https://www.amma-group.com/'}
+            ].map((partner, i) => (
+              <div key={i} className="h-50 md:h-80 bg-white/5 border border-white/5 hover:border-best-yellow/30 transition-all flex flex-col justify-center items-center rounded-lg p-6 group duration-300 cursor-pointer">
+                <img
+                  onClick={() => window.open(partner.link, "_blank")} 
+                  src={partner.source}
+                  alt={partner.name}
+                  className="w-full  object-cover rounded-lg"
+                  style={{
+                    maskImage: `
+                      linear-gradient(to right, transparent, black 15%, black 85%, transparent),
+                      linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)
+                    `,
+                    WebkitMaskImage: `
+                      linear-gradient(to right, transparent, black 5%, black 95%, transparent),
+                      linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)
+                    `,
+                    maskComposite: 'intersect',
+                    WebkitMaskComposite: 'source-in', // Compatibilitate pentru Safari / Chrome mai vechi
+                  }}
+                >
+                </img>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 border-t border-white/5 bg-best-dark/20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto p-12 border border-white/10 bg-white/5 text-center rounded-2xl relative overflow-hidden backdrop-blur-sm">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-best-yellow/5 rounded-full blur-[100px] pointer-events-none" />
-            <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-6 tracking-tight text-white">
-              {sp.ctaTitle}
-            </h2>
-            <p className="text-white/60 leading-relaxed mb-8 max-w-xl mx-auto font-light">
-              {sp.ctaText}
-            </p>
-            <a 
-              href="#contact" 
-              className="inline-flex items-center gap-3 px-8 py-4 bg-best-yellow text-best-black font-display font-bold uppercase tracking-wider hover:bg-white transition-colors cursor-pointer"
-            >
-              {sp.ctaButton} <Mail className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
@@ -1363,11 +1389,31 @@ function AnnualPartnersPage({ t, lang }: { t: any; lang: string }) {
           <h2 className="text-3xl md:text-5xl font-display font-bold uppercase mb-12 tracking-tight text-center text-best-yellow italic">
             {ap.currentTitle}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto items-center">
-            {['Companie1', 'Companie2', 'Companie3', 'Companie4'].map((partner, i) => (
-              <div key={i} className="h-32 bg-white/5 border border-white/5 hover:border-best-yellow/20 transition-all flex flex-col justify-center items-center rounded-lg p-6 group duration-300 cursor-pointer">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-4xl mx-auto items-center">
+            {[
+              { name: 'BRD – Groupe Société Générale', source: brdLogo, link: lang === 'ro' ? 'https://www.brd.ro/' : 'https://www.brd.ro/en'}
+            ].map((partner, i) => (
+              <div key={i} className="h-50 md:h-130 bg-white/5 border border-white/5 hover:border-best-yellow/20 transition-all flex flex-col justify-center items-center rounded-lg p-6 group duration-300 cursor-pointer">
                 <div className="text-lg font-display font-bold uppercase italic tracking-wider text-white/40 group-hover:text-white transition-colors duration-300">
-                  {partner}
+                  <img
+                  onClick={() => window.open(partner.link, "_blank")} 
+                  src={partner.source}
+                  alt={partner.name}
+                  className="w-full  object-cover rounded-lg"
+                  style={{
+                    maskImage: `
+                      linear-gradient(to right, transparent, black 15%, black 85%, transparent),
+                      linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)
+                    `,
+                    WebkitMaskImage: `
+                      linear-gradient(to right, transparent, black 5%, black 95%, transparent),
+                      linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)
+                    `,
+                    maskComposite: 'intersect',
+                    WebkitMaskComposite: 'source-in', // Compatibilitate pentru Safari / Chrome mai vechi
+                  }}
+                >
+                </img>
                 </div>
               </div>
             ))}
